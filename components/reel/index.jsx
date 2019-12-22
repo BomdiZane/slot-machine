@@ -1,5 +1,5 @@
 //#region imports
-import homeStyles from './homeStyle';
+import reelStyle from './reelStyle';
 import { getBackground } from '../../style/dynamicStyle';
 
 import { connect } from 'react-redux';
@@ -32,6 +32,6 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-  withStyles(homeStyles),
+  withStyles(reelStyle),
   connect(mapStateToProps, null)
 )(Reel);

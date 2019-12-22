@@ -9,6 +9,9 @@ module.exports = {
     mobile: '+372 5878 1144',
   },
   ALLOWED_THEMES: ['light', 'dark'],
+  MIN_BALANCE: 0,
+  MAX_BALANCE: 5000,
+  SPIN_COST: 1,
 };
 
 // NB: first value of enum arrays are used as defaults

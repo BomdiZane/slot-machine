@@ -13,7 +13,7 @@ export function initializeOptions(value){
     isValid: true,
     showErrors: true
   };
-  if (options.value.trim().length < 1) options.isValid = false;
+  if (!value) options.isValid = false;
 
   return options;
 }

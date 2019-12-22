@@ -49,7 +49,7 @@ export default theme => ({
   fab: { zIndex: theme.zIndex.drawer + 2, },
   dark: { backgroundColor: 'var(--secondary-blue)', },
   light: {
-    backgroundColor: 'var(--primary-white)',
-    color: 'var(--primary-black)',
+    backgroundColor: 'var(--secondary-white)',
+    color: 'var(--secondary-blue)',
   },
 });

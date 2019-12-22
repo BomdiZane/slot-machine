@@ -8,39 +8,7 @@ export const paperStyles = theme => ({
   },
 });
 
-export const buttonStyles = theme => ({
-  button: {
-    margin: theme.spacing(1),
-  },
-  leftIcon: {
-    marginRight: theme.spacing(1),
-  },
-  rightIcon: {
-    marginLeft: theme.spacing(1),
-  },
-  iconSmall: {
-    fontSize: 20,
-  },
-});
-
 const templateStyles = {
-  sectionHeader: {
-    margin: '30px 10px',
-    textAlign: 'center',
-    width: '100%'
-  },
-  buttonHolder: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexWrap: 'wrap-reverse',
-    position: 'absolute',
-    bottom: '0',
-    left: '0',
-    right: '0',
-    padding: '0 2%',
-    backgroundColor: 'none'
-  },
   paper: {
     paperDark: {
       backgroundColor: 'var(--secondary-blue)',
@@ -49,6 +17,10 @@ const templateStyles = {
     paperLight: {},
   },
   input: {
+    textFieldSmall: {
+      margin: '5px',
+      width: '100px'
+    },
     textField: {
       margin: '5px',
       width: '45%',
@@ -68,6 +40,7 @@ const templateStyles = {
       color: 'var(--lightText)',
       opacity: 0.85
     },
+    adornment: { color: 'var(--lightText)' },
     underline: {
       '&:before': {
         borderColor: 'var(--lightText)',
