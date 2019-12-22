@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "name": "Slot Machine",
+  "public": false,
+  "scope": "bomdisoft",
+  "regions": ["all"],
+  "github": {
+    "enabled": false,
+    "autoAlias": false,
+    "silent": true,
+    "autoJobCancelation": false
+  }
+}

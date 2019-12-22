@@ -1,0 +1,8 @@
+node_modules
+security
+build
+.next
+*.ppk
+*~
+.env*
+__snapshots__

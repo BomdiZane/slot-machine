@@ -1,0 +1,7 @@
+node_modules
+security
+build
+dist
+.next
+*.ppk
+*~
