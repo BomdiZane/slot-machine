@@ -1,22 +1,18 @@
 //#region imports
 import payTableStyle from './payTableStyle';
-import { getInputStyle } from '../../style/dynamicStyle';
+import { getTypographyStyle } from '../../style/dynamicStyle';
 
-import { useState } from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import { withStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
-
-import Reel from '../reel';
-import Button from '../button';
+import { withStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core';
 
 import { togglePopup } from '../popup/popupActions';
 //#endregion
 
 const PayTable = ({
-  body: { currentTheme }, togglePopup, classes: { table }
+  body: { currentTheme }, togglePopup, classes: { table, paperDark, paperLight, header }
 }) => {
   const rows = [
     { combination: '3 CHERRY symbols', line: 'Bottom', reward: 4000 },
@@ -30,23 +26,26 @@ const PayTable = ({
     { combination: 'Any combination of BAR symbols', line: 'Any', reward: 5 },
   ];
 
+  const typographyStyle = getTypographyStyle(currentTheme);
+
   return (
-    <TableContainer component={ Paper }>
-      <Table className={ table } size='small' aria-label='Pay Table'>
+    <TableContainer className={ classnames(table, currentTheme === 'dark' ? paperDark : paperLight) } component={ Paper }>
+      <Typography className={ header } style={ typographyStyle } variant='h6'>Pay Table</Typography>
+      <Table size='small' aria-label='Pay Table'>
         <TableHead>
           <TableRow>
-            <TableCell>Combination</TableCell>
-            <TableCell>Line</TableCell>
-            <TableCell align='right'>Reward (€)</TableCell>
+            <TableCell><strong style={ typographyStyle }>Combination</strong></TableCell>
+            <TableCell><strong style={ typographyStyle }>Line</strong></TableCell>
+            <TableCell align='right'><strong style={ typographyStyle }>Reward (€)</strong></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {
             rows.map(row => (
               <TableRow key={ row.combination }>
-                <TableCell component='th' scope='row'>{ row.combination }</TableCell>
-                <TableCell align='right'>{ row.line }</TableCell>
-                <TableCell align='right'>{ row.reward }</TableCell>
+                <TableCell style={ typographyStyle }>{ row.combination }</TableCell>
+                <TableCell style={ typographyStyle }>{ row.line }</TableCell>
+                <TableCell style={ typographyStyle } align='right'>{ row.reward }</TableCell>
               </TableRow>
             ))
           }

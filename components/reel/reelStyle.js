@@ -8,8 +8,15 @@ const reelStyle = theme =>  ({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    border: '1px solid',
-    zIndex: 100
+    borderLeft: '1px solid',
+    borderRight: '1px solid',
+    '&:first-of-type': {
+      borderLeft: 'none'
+    },
+    '&:last-of-type': {
+      borderRight: 'none'
+    },
+    zIndex: 100,
   },
 });
 

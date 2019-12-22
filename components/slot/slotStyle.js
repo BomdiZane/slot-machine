@@ -6,14 +6,15 @@ const slotStyle = theme =>  ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: '10px',
+    paddingBottom: 0,
   },
   board: {
     position: 'relative',
     width: '100%',
     height: '242px',
     overflow: 'hidden',
-    border: '2px solid',
     borderRadius: 'var(--default-radius)',
     display: 'flex',
     justifyContent: 'space-between',
@@ -37,6 +38,7 @@ const slotStyle = theme =>  ({
   middleDivider: { top: '50%' },
   bottomDivider: { top: '75%' },
   ...templateStyles.input,
+  ...templateStyles.paper,
 });
 
 export default slotStyle;

@@ -13,7 +13,7 @@ import PayTable from '../payTable';
 import { togglePopup } from '../popup/popupActions';
 //#endregion
 
-const Main = ({ togglePopup, classes: { section }}) => {
+const Main = ({ body: { currentTheme }, togglePopup, classes: { section }}) => {
   return (
     <Section className={ section }>
       <Slot />

@@ -6,11 +6,9 @@ const homeStyle = theme =>  ({
     margin: 'auto 0',
     display: 'flex',
     justifyContent: 'space-around',
-    alignItems: 'flex-end',
-    flexWrap: 'wrap-reverse',
-    paddingBottom: 0,
+    alignItems: 'flex-start',
+    flexWrap: 'wrap',
     '@media (max-width: 770px)': {
-      padding: 0,
       margin: 0,
     }
   },

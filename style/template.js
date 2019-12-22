@@ -11,7 +11,7 @@ export const paperStyles = theme => ({
 const templateStyles = {
   paper: {
     paperDark: {
-      backgroundColor: 'var(--secondary-blue)',
+      backgroundColor: 'var(--lightDark)',
       color: 'var(--lightText)'
     },
     paperLight: {},

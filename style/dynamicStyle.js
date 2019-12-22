@@ -63,7 +63,7 @@ export function getSectionHeaderStyle(currentTheme) {
 
 export function getBackground(currentTheme) {
   if (currentTheme === 'dark') return {
-    backgroundColor: 'var(--secondary-blue)'
+    backgroundColor: 'var(--lightDark)'
   };
 
   if (currentTheme === 'light') return {

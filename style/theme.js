@@ -51,6 +51,11 @@ const theme = createMuiTheme({
         fontFamily: 'Montserrat'
       }
     },
+    MuiTableCell: {
+      root: {
+        borderBottom: 'none'
+      }
+    },
     MuiAvatar: {
       img: {
         backgroundColor: 'transparent'
