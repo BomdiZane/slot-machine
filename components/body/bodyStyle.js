@@ -16,9 +16,7 @@ export default theme => ({
     color: 'var(--lightText)',
     lineHeight: 1.5,
     textAlign: 'left',
-    paddingLeft: 'var(--sidebar-width)',
     '@media (max-width: 770px)': {
-      paddingLeft: 0,
       paddingTop: '60px',
     }
   },

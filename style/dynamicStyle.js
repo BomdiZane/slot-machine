@@ -5,6 +5,7 @@ export function getStyle(componentName, currentTheme) {
     case 'inputStyle': return getInputStyle(currentTheme);
     case 'sectionHeader': return getSectionHeaderStyle(currentTheme);
     case 'socialIcon': return getSocialIconStyle(currentTheme);
+    case 'background': return getBackground(currentTheme);
 
     default: return {};
   }
@@ -57,5 +58,15 @@ export function getSectionHeaderStyle(currentTheme) {
 
   if (currentTheme === 'light') return {
 
+  };
+}
+
+export function getBackground(currentTheme) {
+  if (currentTheme === 'dark') return {
+    backgroundColor: 'var(--secondary-blue)'
+  };
+
+  if (currentTheme === 'light') return {
+    backgroundColor: 'var(--white)'
   };
 }
