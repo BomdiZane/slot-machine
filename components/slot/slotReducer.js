@@ -1,17 +1,8 @@
-const defaultState = {
-  activeReel: ''
-};
+const defaultState = {};
 
-const reelReducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case 'SET_ACTIVE_REEL':
-      state = {
-        ...state,
-        activeReel: action.payload,
-      };
-      break;
-  }
+const slotReducer = (state = defaultState, action) => {
+  switch (action.type) {}
   return state;
 };
 
-export default reelReducer;
+export default slotReducer;

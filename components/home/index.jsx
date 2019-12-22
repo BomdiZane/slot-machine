@@ -8,6 +8,7 @@ import { withStyles } from '@material-ui/core';
 
 import Section from '../section/section';
 import Slot from '../slot';
+import PayTable from '../payTable';
 
 import { togglePopup } from '../popup/popupActions';
 //#endregion
@@ -16,6 +17,7 @@ const Main = ({ togglePopup, classes: { section }}) => {
   return (
     <Section className={ section }>
       <Slot />
+      <PayTable />
     </Section>
   );
 };

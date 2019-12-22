@@ -1,6 +1,6 @@
-import Reel from './index';
+import Slot from './index';
 
-describe('Reel component:', () => {
-  const reel = shallow(<Reel />);
-  it('should match snapshot', () => expect(reel).toMatchSnapshot());
+describe('Slot component:', () => {
+  const slot = shallow(<Slot />);
+  it('should match snapshot', () => expect(slot).toMatchSnapshot());
 });
