@@ -12,6 +12,12 @@ const homeStyle = theme =>  ({
       margin: 0,
     }
   },
+  group: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
   ...templateStyles.paper,
 });
 

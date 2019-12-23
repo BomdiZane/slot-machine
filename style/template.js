@@ -16,6 +16,11 @@ const templateStyles = {
     },
     paperLight: {},
   },
+  header: {
+    width: '100%',
+    margin: '0',
+    padding: '10px',
+  },
   input: {
     textFieldSmall: {
       margin: '5px',
@@ -27,7 +32,7 @@ const templateStyles = {
       minWidth: '280px',
     },
     textFieldFull: {
-      margin: '5px',
+      margin: '5px 0',
       width: '100%',
     },
     formControlLabel: { margin: '10px 5px' },

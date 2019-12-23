@@ -56,6 +56,11 @@ const theme = createMuiTheme({
         borderBottom: 'none'
       }
     },
+    MuiMenu: {
+      paper: {
+        maxHeight: '40vh'
+      }
+    },
     MuiAvatar: {
       img: {
         backgroundColor: 'transparent'

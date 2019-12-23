@@ -18,32 +18,32 @@ import { withStyles, Tooltip, Switch } from '@material-ui/core';
 //#endregion
 
 const SwitchButton = ({
-	classes: { root, switchBase, track, thumb, checked }, action, label, isChecked, id
+  classes: { root, switchBase, track, thumb, checked }, action, label, isChecked, id
 }) => (
-	<Tooltip title={ label } placement='right'>
-		<Switch checked={ isChecked } onChange={ action } id={ id } classes={{ root, switchBase, track, thumb, checked }} />
-	</Tooltip>
+  <Tooltip title={ label } placement='right'>
+    <Switch checked={ isChecked } onChange={ action } id={ id } classes={{ root, switchBase, track, thumb, checked }} />
+  </Tooltip>
 );
 
 const mapStateToProps = state => ({ body: state.body });
 
 SwitchButton.propTypes = {
-	classes: PropTypes.object.isRequired,
-	body: PropTypes.shape({
-		currentTheme: PropTypes.string.isRequired,
-	}),
-	action: PropTypes.func.isRequired,
-	isChecked: PropTypes.bool.isRequired,
-	label: PropTypes.string,
-	id: PropTypes.string,
+  classes: PropTypes.object.isRequired,
+  body: PropTypes.shape({
+    currentTheme: PropTypes.string.isRequired,
+  }),
+  action: PropTypes.func.isRequired,
+  isChecked: PropTypes.bool.isRequired,
+  label: PropTypes.string,
+  id: PropTypes.string,
 };
 
 SwitchButton.defaultProps = {
-	label: '',
-	id: '',
+  label: '',
+  id: '',
 };
 
 export default compose(
-	withStyles(switchButtonStyle),
-	connect(mapStateToProps, null),
+  withStyles(switchButtonStyle),
+  connect(mapStateToProps, null),
 )(SwitchButton);

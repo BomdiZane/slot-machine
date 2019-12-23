@@ -9,6 +9,8 @@ module.exports = {
     mobile: '+372 5878 1144',
   },
   ALLOWED_THEMES: ['light', 'dark'],
+  REEL_SYMBOLS: ['BAR', '2xBAR', '3xBAR', '7', 'CHERRY'],
+  REEL_POSITIONS: ['Top', 'Center', 'Bottom'],
   MIN_BALANCE: 0,
   MAX_BALANCE: 5000,
   SPIN_COST: 1,

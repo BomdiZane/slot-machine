@@ -9,15 +9,17 @@ import { withStyles } from '@material-ui/core';
 import Section from '../section/section';
 import Slot from '../slot';
 import PayTable from '../payTable';
-
-import { togglePopup } from '../popup/popupActions';
+import ReelController from '../reel/controller';
 //#endregion
 
-const Main = ({ body: { currentTheme }, togglePopup, classes: { section }}) => {
+const Main = ({ classes: { section, group }}) => {
   return (
     <Section className={ section }>
       <Slot />
-      <PayTable />
+      <div className={ group }>
+        <PayTable />
+        <ReelController />
+      </div>
     </Section>
   );
 };
@@ -27,18 +29,13 @@ Main.propTypes = {
   body: PropTypes.shape({
     currentTheme: PropTypes.string.isRequired,
   }),
-  togglePopup: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   body: state.body,
 });
 
-const mapDispatchToProps = dispatch => ({
-  togglePopup: options => dispatch(togglePopup(options)),
-});
-
 export default compose(
   withStyles(homeStyles),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, null)
 )(Main);

@@ -13,19 +13,19 @@ import Reel from '../reel';
 import Button from '../button';
 
 import { togglePopup } from '../popup/popupActions';
+import { setIsSpinning } from './slotActions';
 import { initializeOptions } from '../../utils/helpers';
 import { MIN_BALANCE, MAX_BALANCE, SPIN_COST } from '../../utils/constants';
 //#endregion
 
 const Slot = ({
-  body: { currentTheme }, togglePopup,
+  body: { currentTheme }, slot: { isSpinning }, togglePopup, setIsSpinning,
   classes: {
     slot, controls, board, divider, topDivider, middleDivider, bottomDivider, textFieldSmall, underline, darkLabel,
     adornment, paperDark, paperLight
   }
 }) => {
   const [balance, setBalance] = useState({ value: 200, isValid: true, showErrors: true });
-  const [isSpinning, setIsSpinning] = useState(true);
 
   const balanceChanged = e => {
     if (isSpinning) return togglePopup({ open: true, variant: 'warning', message: 'Please wait...' });
@@ -73,15 +73,21 @@ Slot.propTypes = {
   body: PropTypes.shape({
     currentTheme: PropTypes.string.isRequired,
   }),
+  slot: PropTypes.shape({
+    isSpinning: PropTypes.bool.isRequired,
+  }),
   togglePopup: PropTypes.func.isRequired,
+  setIsSpinning: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   body: state.body,
+  slot: state.slot,
 });
 
 const mapDispatchToProps = dispatch => ({
   togglePopup: options => dispatch(togglePopup(options)),
+  setIsSpinning: value => dispatch(setIsSpinning(value)),
 });
 
 export default compose(
