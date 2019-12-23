@@ -64,6 +64,10 @@ const GLOBALS = () =>
         .arrow{ display: none; }
       }
 
+      @keyframes blink {
+        to { background: var(--medium-blue); }
+      }
+
       :root {
         --white: white;
         --red: #ed5a6a;

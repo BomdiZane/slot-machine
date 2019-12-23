@@ -11,7 +11,7 @@
 import slotStyle from './slotStyle';
 import { getInputStyle } from '../../style/dynamicStyle';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
@@ -22,19 +22,38 @@ import Reel from '../reel';
 import Button from '../button';
 
 import { togglePopup } from '../popup/popupActions';
+import { updateReel } from '../reel/reelActions';
+import { setWinRows } from '../payTable/payTableActions';
 import { setIsSpinning } from './slotActions';
 import { initializeOptions, getRandomInt } from '../../utils/helpers';
-import { MIN_BALANCE, MAX_BALANCE, SPIN_COST, REEL_SYMBOLS, REEL_POSITIONS, SYMBOL_HEIGHT } from '../../utils/constants';
+import { MIN_BALANCE, MAX_BALANCE, SPIN_COST, REEL_SYMBOLS, REEL_POSITIONS, SYMBOL_HEIGHT, SPIN_DURATION } from '../../utils/constants';
 //#endregion
 
 const Slot = ({
-  body: { currentTheme }, slot: { isSpinning }, reel: { controlIsActive, reel: { reelOne, reelTwo, reelThree }}, togglePopup, setIsSpinning,
+  body: { currentTheme }, slot: { isSpinning }, reel: { controlIsActive, reel: { reelOne, reelTwo, reelThree }},
+  togglePopup, setIsSpinning, updateReel, setWinRows,
   classes: {
     slot, controls, board, divider, topDivider, middleDivider, bottomDivider, textFieldSmall, underline, darkLabel,
     adornment, paperDark, paperLight, activeReelLine
   }
 }) => {
-  const getScrollBy = reel => {
+  const [balance, setBalance] = useState({ value: 200, isValid: true, showErrors: true });
+  const [scrollReelOneBy, setScrollReelOneBy] = useState(0);
+  const [scrollReelTwoBy, setScrollReelTwoBy] = useState(0);
+  const [scrollReelThreeBy, setScrollReelThreeBy] = useState(0);
+  const [winPositions, setWinPositions] = useState([]);
+  const spinStopDelays = [0, 500, 1000];
+  const boardRef = useRef();
+
+  const balanceChanged = e => {
+    if (isSpinning) return togglePopup({ open: true, variant: 'error', message: 'Please wait...' });
+
+    let options = initializeOptions(e.target.value);
+    if (!Number(options.value) || Number(options.value) <= MIN_BALANCE || Number(options.value) > MAX_BALANCE) options.isValid = false;
+    setBalance(options);
+  };
+
+  const getScrollBy = (reel, reelID) => {
     let symbolIndex, positionIndex;
 
     if (controlIsActive) {
@@ -54,39 +73,39 @@ const Slot = ({
     // Scroll in which direction (up or down)?
     const direction = -1;
 
+    // Update reel states. Will be used later for computing and displaying results
+    updateReel(reelID, 'symbol', REEL_SYMBOLS[symbolIndex]);
+    updateReel(reelID, 'position', REEL_POSITIONS[positionIndex]);
+
     return amplitude * direction; // vector
   };
 
-  const [balance, setBalance] = useState({ value: 200, isValid: true, showErrors: true });
-  const [scrollReelOneBy, setScrollReelOneBy] = useState(getScrollBy(reelOne));
-  const [scrollReelTwoBy, setScrollReelTwoBy] = useState(getScrollBy(reelTwo));
-  const [scrollReelThreeBy, setScrollReelThreeBy] = useState(getScrollBy(reelThree));
-  const [winPosition, setWinPosition] = useState('center');
-  const spinStopDelays = [0, 500, 1000];
-
-  const balanceChanged = e => {
-    if (isSpinning) return togglePopup({ open: true, variant: 'warning', message: 'Please wait...' });
-
-    let options = initializeOptions(e.target.value);
-    if (!Number(options.value) || Number(options.value) <= MIN_BALANCE || Number(options.value) > MAX_BALANCE) options.isValid = false;
-    setBalance(options);
-  };
-
   const spinReels = () => {
-    if (isSpinning) return togglePopup({ open: true, variant: 'warning', message: 'Please wait...' });
+    if (isSpinning) return togglePopup({ open: true, variant: 'error', message: 'Please wait...' });
     if (balance.value <= MIN_BALANCE) return togglePopup({ open: true, variant: 'error', message: 'Please refill balance to continue!' });
 
     setIsSpinning(true);
     setBalance(initializeOptions(balance.value - SPIN_COST));
-    setScrollReelOneBy(getScrollBy(reelOne));
-    setScrollReelTwoBy(getScrollBy(reelTwo));
-    setScrollReelThreeBy(getScrollBy(reelThree));
-    computeWins();
-    setIsSpinning(false);
+    setScrollReelOneBy(getScrollBy(reelOne, 'reelOne'));
+    setScrollReelTwoBy(getScrollBy(reelTwo, 'reelTwo'));
+    setScrollReelThreeBy(getScrollBy(reelThree, 'reelThree'));
+
+    // Wait for all animations to finish and then update UI with results
+    // Promise.all(boardRef.current.getAnimations({ subtree: true }).map(animation => animation.finished)).then(() => showResults()); // Experimental!!!
+    setTimeout(showResults, SPIN_DURATION + Math.max(...spinStopDelays));
   };
 
-  const computeWins = () => {
-    setWinPosition('top');
+  const showResults = () => {
+    console.log('All animations done...');
+    console.log('reelOne: '+JSON.stringify(reelOne));
+    console.log('reelTwo: '+JSON.stringify(reelTwo));
+    console.log('reelThree: '+JSON.stringify(reelThree));
+    let newWinPositions = [];
+    let newWinRows = [];
+    let reward = 0;
+
+
+    setIsSpinning(false);
   };
 
   return (
@@ -99,15 +118,15 @@ const Slot = ({
           InputProps={{ classes: { underline }, startAdornment: <InputAdornment position='start' classes={{ root: adornment }} disableTypography>€</InputAdornment> }}
         />
       </div>
-      <div className={ board }>
+      <div className={ board } ref={ boardRef }>
         <Reel scrollBy={ scrollReelOneBy } spinStopDelay={ spinStopDelays[0] } />
         <Reel scrollBy={ scrollReelTwoBy } spinStopDelay={ spinStopDelays[1] } />
         <Reel scrollBy={ scrollReelThreeBy } spinStopDelay={ spinStopDelays[2] } />
-        <Divider className={ classnames(divider, topDivider, winPosition === 'top' && activeReelLine) } />
-        <Divider className={ classnames(divider, middleDivider, winPosition === 'center' && activeReelLine) } />
-        <Divider className={ classnames(divider, bottomDivider, winPosition === 'bottom' && activeReelLine) } />
+        <Divider className={ classnames(divider, topDivider, winPositions.includes('top') && activeReelLine) } />
+        <Divider className={ classnames(divider, middleDivider, winPositions.includes('center') && activeReelLine) } />
+        <Divider className={ classnames(divider, bottomDivider, winPositions.includes('bottom') && activeReelLine) } />
       </div>
-      <Button round={ true } type={ balance.value <= MIN_BALANCE ? 'secondary' : 'primary' } onClick={ spinReels }>Spin</Button>
+      <Button round={ true } type={ isSpinning || balance.value <= MIN_BALANCE ? 'secondary' : 'primary' } onClick={ spinReels }>Spin</Button>
     </Paper>
   );
 };
@@ -130,6 +149,8 @@ Slot.propTypes = {
   }),
   togglePopup: PropTypes.func.isRequired,
   setIsSpinning: PropTypes.func.isRequired,
+  setWinRows: PropTypes.func.isRequired,
+  updateReel: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -141,6 +162,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   togglePopup: options => dispatch(togglePopup(options)),
   setIsSpinning: value => dispatch(setIsSpinning(value)),
+  setWinRows: rowIDs => dispatch(setWinRows(rowIDs)),
+  updateReel: (reel, key, value) => dispatch(updateReel(reel, key, value)),
 });
 
 export default compose(

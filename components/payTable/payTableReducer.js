@@ -1,13 +1,13 @@
 const defaultState = {
-  activeRow: ''
+  winRows: [1, 5, '8']
 };
 
 const payTableReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case 'UPDATE_ACTIVE_ROW':
+    case 'SET_WIN_ROWS':
       state = {
         ...state,
-        activeRow: action.payload,
+        winRows: action.payload,
       };
       break;
   }

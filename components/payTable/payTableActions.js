@@ -1,6 +1,6 @@
-export function updateActiveRow(rowID='') {
+export function setWinRows(rowIDs=[]) {
   return {
-    type: 'UPDATE_ACTIVE_ROW',
-    payload: rowID
+    type: 'SET_WIN_ROWS',
+    payload: rowIDs
   };
 }

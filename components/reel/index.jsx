@@ -18,12 +18,11 @@ import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
 
-import { SYMBOL_HEIGHT, REEL_SYMBOLS } from '../../utils/constants';
+import { SYMBOL_HEIGHT, REEL_SYMBOLS, SPIN_DURATION } from '../../utils/constants';
 //#endregion
 
 const Reel = ({ scrollBy, spinStopDelay, body: { currentTheme }, slot: { isSpinning }, classes: { reel, scrollHide, cannotScroll, symbol }}) => {
   const NUMBER_OF_ROWS = REEL_SYMBOLS.length + 2; // 2 offset symbols, one at start and one at end of reel
-  const SPIN_DURATION = 2000 + spinStopDelay; // 2 seconds in milliseconds
   const ITERATIONS = 15;
   const OFFSET = SYMBOL_HEIGHT;
 
@@ -40,10 +39,10 @@ const Reel = ({ scrollBy, spinStopDelay, body: { currentTheme }, slot: { isSpinn
   // We don't want that, as it might look buggy to a user
   // N.B: this means we have a re-render on every click of the spin button, but that's okay.
   reelRefs.forEach(reelRef => {
-    reelRef.current && reelRef.current.animate(
+    isSpinning && reelRef.current && reelRef.current.animate(
       { top: [0, `-${ (NUMBER_OF_ROWS * SYMBOL_HEIGHT) - OFFSET }px`, `${ scrollBy }px`] },
       {
-        duration: SPIN_DURATION / ITERATIONS,
+        duration: (SPIN_DURATION + spinStopDelay) / ITERATIONS,
         iterations: ITERATIONS,
         easing: 'linear',
         fill: 'forwards',

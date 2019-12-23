@@ -37,7 +37,7 @@ const slotStyle = theme =>  ({
   topDivider: { top: '25%' },
   middleDivider: { top: '50%' },
   bottomDivider: { top: '75%' },
-  activeReelLine: { backgroundColor: 'var(--cyan) !important' },
+  activeReelLine: { animation: 'blink 2s infinite' },
   ...templateStyles.input,
   ...templateStyles.paper,
 });

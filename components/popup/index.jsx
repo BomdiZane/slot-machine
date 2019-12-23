@@ -18,7 +18,7 @@ const variantIcon = {
   info: Info,
 };
 
-const Popup = ({ classes, popup: { open, variant, message, vertical='top', horizontal='right', duration=5000 }, togglePopup }) => {
+const Popup = ({ classes, popup: { open, variant, message, vertical='top', horizontal='right', duration=2000 }, togglePopup }) => {
   const Icon = variantIcon[variant];
 
   return (

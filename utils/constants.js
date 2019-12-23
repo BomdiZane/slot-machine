@@ -15,6 +15,7 @@ module.exports = {
   MAX_BALANCE: 5000,
   SPIN_COST: 1,
   SYMBOL_HEIGHT: 121,
+  SPIN_DURATION: 2000, // 2 seconds in milliseconds
 };
 
 // NB: first value of enum arrays are used as defaults

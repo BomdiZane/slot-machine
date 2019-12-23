@@ -33,7 +33,7 @@ const Reel = ({
   }
 }) => {
   const controlStateChanged = () => {
-    return isSpinning ? togglePopup({ open: true, variant: 'warning', message: 'Please wait...' }) : setControlIsActive(!controlIsActive);
+    return isSpinning ? togglePopup({ open: true, variant: 'error', message: 'Please wait...' }) : setControlIsActive(!controlIsActive);
   };
 
   return (
@@ -45,7 +45,7 @@ const Reel = ({
 
       <div className={ group }>
         <Typography className={ reelName } style={ getTypographyStyle(currentTheme) } variant='body1'>Reel 1</Typography>
-        <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
+        <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive || isSpinning }
           value={ reelOne.symbol } onChange={ (e) => updateReel('reelOne', 'symbol', e.target.value) }
           inputProps={{ style: inputStyle }} InputLabelProps={{ classes: { root: currentTheme === 'dark' ? darkLabel : '' }}}
           InputProps={{ classes: { underline }}}
@@ -56,7 +56,7 @@ const Reel = ({
         >
           { REEL_SYMBOLS.map(symbol => <MenuItem key={ symbol } value={ symbol }>{ symbol }</MenuItem>) }
         </TextField>
-        <TextField id='position' label='Position' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
+        <TextField id='position' label='Position' className={ textFieldFull } select disabled={ !controlIsActive || isSpinning }
           value={ reelOne.position } onChange={ (e) => updateReel('reelOne', 'position', e.target.value) }
           inputProps={{ style: inputStyle }} InputLabelProps={{ classes: { root: currentTheme === 'dark' ? darkLabel : '' }}}
           InputProps={{ classes: { underline }}}
@@ -71,7 +71,7 @@ const Reel = ({
 
       <div className={ group }>
         <Typography className={ reelName } style={ getTypographyStyle(currentTheme) } variant='body1'>Reel 2</Typography>
-        <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
+        <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive || isSpinning }
           value={ reelTwo.symbol } onChange={ (e) => updateReel('reelTwo', 'symbol', e.target.value) }
           inputProps={{ style: inputStyle }} InputLabelProps={{ classes: { root: currentTheme === 'dark' ? darkLabel : '' }}}
           InputProps={{ classes: { underline }}}
@@ -82,7 +82,7 @@ const Reel = ({
         >
           { REEL_SYMBOLS.map(symbol => <MenuItem key={ symbol } value={ symbol }>{ symbol }</MenuItem>) }
         </TextField>
-        <TextField id='position' label='Position' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
+        <TextField id='position' label='Position' className={ textFieldFull } select disabled={ !controlIsActive || isSpinning }
           value={ reelTwo.position } onChange={ (e) => updateReel('reelTwo', 'position', e.target.value) }
           inputProps={{ style: inputStyle }} InputLabelProps={{ classes: { root: currentTheme === 'dark' ? darkLabel : '' }}}
           InputProps={{ classes: { underline }}}
@@ -97,7 +97,7 @@ const Reel = ({
 
       <div className={ group }>
         <Typography className={ reelName } style={ getTypographyStyle(currentTheme) } variant='body1'>Reel 3</Typography>
-        <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
+        <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive || isSpinning }
           value={ reelThree.symbol } onChange={ (e) => updateReel('reelThree', 'symbol', e.target.value) }
           inputProps={{ style: inputStyle }} InputLabelProps={{ classes: { root: currentTheme === 'dark' ? darkLabel : '' }}}
           InputProps={{ classes: { underline }}}
@@ -108,7 +108,7 @@ const Reel = ({
         >
           { REEL_SYMBOLS.map(symbol => <MenuItem key={ symbol } value={ symbol }>{ symbol }</MenuItem>) }
         </TextField>
-        <TextField id='position' label='Position' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
+        <TextField id='position' label='Position' className={ textFieldFull } select disabled={ !controlIsActive || isSpinning }
           value={ reelThree.position } onChange={ (e) => updateReel('reelThree', 'position', e.target.value) }
           inputProps={{ style: inputStyle }} InputLabelProps={{ classes: { root: currentTheme === 'dark' ? darkLabel : '' }}}
           InputProps={{ classes: { underline }}}

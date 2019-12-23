@@ -14,12 +14,10 @@ import compose from 'recompose/compose';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core';
-
-import { togglePopup } from '../popup/popupActions';
 //#endregion
 
 const PayTable = ({
-  body: { currentTheme }, togglePopup, classes: { table, paperDark, paperLight, header }
+  body: { currentTheme }, payTable: { winRows }, classes: { table, paperDark, paperLight, header, winRow }
 }) => {
   const rows = [
     { combination: '3 CHERRY symbols', line: 'Bottom', reward: 4000 },
@@ -48,8 +46,8 @@ const PayTable = ({
         </TableHead>
         <TableBody>
           {
-            rows.map(row => (
-              <TableRow key={ row.combination }>
+            rows.map((row, index) => (
+              <TableRow key={ row.combination } className={ winRows.includes(index + 1) ? winRow : '' }>
                 <TableCell style={ typographyStyle }>{ row.combination }</TableCell>
                 <TableCell style={ typographyStyle }>{ row.line }</TableCell>
                 <TableCell style={ typographyStyle } align='right'>{ row.reward }</TableCell>
@@ -67,18 +65,17 @@ PayTable.propTypes = {
   body: PropTypes.shape({
     currentTheme: PropTypes.string.isRequired,
   }),
-  togglePopup: PropTypes.func.isRequired,
+  payTable: PropTypes.shape({
+    winRows: PropTypes.array.isRequired,
+  }),
 };
 
 const mapStateToProps = state => ({
   body: state.body,
-});
-
-const mapDispatchToProps = dispatch => ({
-  togglePopup: options => dispatch(togglePopup(options)),
+  payTable: state.payTable,
 });
 
 export default compose(
   withStyles(payTableStyle),
-  connect(mapStateToProps, mapDispatchToProps)
+  connect(mapStateToProps, null)
 )(PayTable);

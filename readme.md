@@ -1,4 +1,4 @@
-# [Slot Machine](https://slot.now.sh)
+# [Slot Machine](https://igame.bomdisoft.com/)
 
 Slot Machine test app
 
@@ -9,6 +9,6 @@ Slot Machine test app
 
 Adombang Munang Mbomndih (Bomdi)
 
-[Portfolio](https://bomdisoft.com)
-
 <dzedock@yahoo.com>
+
+[Website](https://bomdisoft.com)
