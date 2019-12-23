@@ -14,7 +14,7 @@ const slotStyle = theme =>  ({
     position: 'relative',
     width: '100%',
     height: '242px',
-    margin: '20px 0',
+    marginTop: '30px',
     borderRadius: 'var(--default-radius)',
     display: 'flex',
     justifyContent: 'space-between',

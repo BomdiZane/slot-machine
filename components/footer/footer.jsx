@@ -4,6 +4,7 @@ import footerStyle from './footerStyle';
 import PropTypes from 'prop-types';
 import { Avatar, Tooltip, withStyles } from '@material-ui/core';
 
+import Social from '../social';
 import { LOGO } from '../../utils/constants';
 //#endregion
 
@@ -13,6 +14,7 @@ const Footer = ({ classes: { pageFooter, logo }}) => {
   return (
     <>
       <footer className={ pageFooter }>
+        <Social />
         <Tooltip title='Scroll to top' placement='right'>
           <Avatar className={ logo } alt='logo' src={ LOGO } onClick={ scrollToTop } />
         </Tooltip>

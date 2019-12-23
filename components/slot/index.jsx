@@ -62,6 +62,7 @@ const Slot = ({
   const [scrollReelTwoBy, setScrollReelTwoBy] = useState(getScrollBy(reelTwo));
   const [scrollReelThreeBy, setScrollReelThreeBy] = useState(getScrollBy(reelThree));
   const [winPosition, setWinPosition] = useState('center');
+  const spinStopDelays = [0, 500, 1000];
 
   const balanceChanged = e => {
     if (isSpinning) return togglePopup({ open: true, variant: 'warning', message: 'Please wait...' });
@@ -99,9 +100,9 @@ const Slot = ({
         />
       </div>
       <div className={ board }>
-        <Reel scrollBy={ scrollReelOneBy } />
-        <Reel scrollBy={ scrollReelTwoBy } />
-        <Reel scrollBy={ scrollReelThreeBy } />
+        <Reel scrollBy={ scrollReelOneBy } spinStopDelay={ spinStopDelays[0] } />
+        <Reel scrollBy={ scrollReelTwoBy } spinStopDelay={ spinStopDelays[1] } />
+        <Reel scrollBy={ scrollReelThreeBy } spinStopDelay={ spinStopDelays[2] } />
         <Divider className={ classnames(divider, topDivider, winPosition === 'top' && activeReelLine) } />
         <Divider className={ classnames(divider, middleDivider, winPosition === 'center' && activeReelLine) } />
         <Divider className={ classnames(divider, bottomDivider, winPosition === 'bottom' && activeReelLine) } />

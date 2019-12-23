@@ -24,7 +24,6 @@
     "node": "12.1.0",
     "npm": "6.12.1"
   },
-  "type": "module",
   "scripts": {
     "build": "next build",
     "now-build": "next build",

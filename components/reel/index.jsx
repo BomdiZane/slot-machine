@@ -21,10 +21,10 @@ import { withStyles } from '@material-ui/core';
 import { SYMBOL_HEIGHT, REEL_SYMBOLS } from '../../utils/constants';
 //#endregion
 
-const Reel = ({ scrollBy, body: { currentTheme }, slot: { isSpinning }, classes: { reel, scrollHide, cannotScroll, symbol }}) => {
+const Reel = ({ scrollBy, spinStopDelay, body: { currentTheme }, slot: { isSpinning }, classes: { reel, scrollHide, cannotScroll, symbol }}) => {
   const NUMBER_OF_ROWS = REEL_SYMBOLS.length + 2; // 2 offset symbols, one at start and one at end of reel
-  const SPIN_DURATION = 2000; // 2 seconds in milliseconds
-  const ITERATIONS = 4;
+  const SPIN_DURATION = 2000 + spinStopDelay; // 2 seconds in milliseconds
+  const ITERATIONS = 15;
   const OFFSET = SYMBOL_HEIGHT;
 
   const generateRefs = numberOfRefs => {
@@ -71,6 +71,7 @@ const Reel = ({ scrollBy, body: { currentTheme }, slot: { isSpinning }, classes:
 Reel.propTypes = {
   classes: PropTypes.object.isRequired,
   scrollBy: PropTypes.number,
+  spinStopDelay: PropTypes.number,
   body: PropTypes.shape({
     currentTheme: PropTypes.string.isRequired,
   }),
@@ -81,6 +82,7 @@ Reel.propTypes = {
 
 Reel.defaultProps = {
   scrollBy: 0,
+  spinStopDelay: 0,
 };
 
 const mapStateToProps = state => ({
