@@ -14,6 +14,7 @@ module.exports = {
   MIN_BALANCE: 0,
   MAX_BALANCE: 5000,
   SPIN_COST: 1,
+  SYMBOL_HEIGHT: 121,
 };
 
 // NB: first value of enum arrays are used as defaults

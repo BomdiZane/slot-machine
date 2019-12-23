@@ -1,10 +1,10 @@
-/** Portfolio Switch Component
+/** Switch Component
  *
  * This component presents a switch button for easy toggling between options
  *
  * @version 1.0.0
- * @created - 2019.02.02
- * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://portfolio.bomdi.now.sh)
+ * @created - 2019.12.22
+ * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://bomdisoft.com)
  */
 
 //#region imports

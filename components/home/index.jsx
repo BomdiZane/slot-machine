@@ -1,3 +1,10 @@
+/** MAIN
+  *
+  * @version 1.0.0
+  * @created - 2019.12.22
+  * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://bomdisoft.com)
+  */
+
 //#region imports
 import homeStyles from './homeStyle';
 
@@ -12,17 +19,15 @@ import PayTable from '../payTable';
 import ReelController from '../reel/controller';
 //#endregion
 
-const Main = ({ classes: { section, group }}) => {
-  return (
-    <Section className={ section }>
-      <Slot />
-      <div className={ group }>
-        <PayTable />
-        <ReelController />
-      </div>
-    </Section>
-  );
-};
+const Main = ({ classes: { section, group }}) =>  (
+  <Section className={ section }>
+    <Slot />
+    <div className={ group }>
+      <PayTable />
+      <ReelController />
+    </div>
+  </Section>
+);
 
 Main.propTypes = {
   classes: PropTypes.object.isRequired,

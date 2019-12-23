@@ -1,10 +1,9 @@
 import templateStyles from '../../style/template';
 
 const reelStyle = theme =>  ({
-  reel: {
+  scrollHide: {
     position: 'relative',
-    width: '33%',
-    minHeight: '100%',
+    width: '32%',
     overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
@@ -20,6 +19,23 @@ const reelStyle = theme =>  ({
     },
     zIndex: 100,
   },
+  reel: {
+    position: 'relative',
+    right: '-10px',
+    padding: '0 10px',
+    marginRight: '10px',
+    maxHeight: '242px',
+    overflowX: 'hidden',
+    overflowY: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: 'var(--lightDark)',
+    zIndex: 90,
+  },
+  cannotScroll: { overflow: 'hidden' },
+  symbol: { position: 'relative' },
   controls: {
     width: '100%',
     display: 'flex',
@@ -50,6 +66,9 @@ const reelStyle = theme =>  ({
   },
   menu: { width: 200 },
   menuIcon: { color: 'var(--lightText)' },
+  animate: {
+    animation: 'slide1 0.25s linear 8, slide2 0.25s 2s linear forwards'
+  },
   header: {
     ...templateStyles.header,
     padding: 0,

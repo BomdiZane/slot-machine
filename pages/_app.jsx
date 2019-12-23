@@ -1,12 +1,12 @@
 /** Root Component
   *
-  * A HOC that wraps sub components with a Redux store, Apollo provider and a Material UI Provider
+  * A HOC that wraps sub components with a Redux store and a Material UI Provider
   * This class also provides the basic structure of the application and sets up global
   * error handling and initialization
   *
   * @version 1.0.0
   * @created - 2019.08.30
-  * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://portfolio.bomdi.now.sh)
+  * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://bomdisoft.com)
   */
 
 //#region imports
@@ -39,12 +39,9 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 class SlotMachine extends App {
-  constructor() {
-    super();
-  }
+  constructor() { super(); }
 
   componentDidMount() {
-
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     if (jssStyles && jssStyles.parentNode) jssStyles.parentNode.removeChild(jssStyles);
@@ -52,8 +49,6 @@ class SlotMachine extends App {
     const userTheme = localStorage.getItem(process.env.USER_THEME_KEY);
     if (userTheme && ALLOWED_THEMES.includes(userTheme)) this.props.store.dispatch({ type: 'SET_THEME', payload: userTheme });
   }
-
-  componentWillUnmount(){}
 
   componentDidCatch(error, errorStack) {
     console.error(error, errorStack);

@@ -1,3 +1,14 @@
+/** REEL CONTROLS
+  *
+  * This component presents reel controls to the client.
+  * This provides clients the ability to manually set the reel scroll positions.
+  * This is useful for debugging.
+  *
+  * @version 1.0.0
+  * @created - 2019.12.22
+  * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://bomdisoft.com)
+  */
+
 //#region imports
 import reelStyle from './reelStyle';
 import { getTypographyStyle } from '../../style/dynamicStyle';
@@ -21,7 +32,9 @@ const Reel = ({
     controls, paperDark, paperLight, header, group, textFieldFull, inputStyle, darkLabel, underline, input, menu, menuIcon, reelName
   }
 }) => {
-  const controlStateChanged = () => isSpinning ? togglePopup({ open: true, variant: 'warning', message: 'Please wait...' }) : setControlIsActive(!controlIsActive);
+  const controlStateChanged = () => {
+    return isSpinning ? togglePopup({ open: true, variant: 'warning', message: 'Please wait...' }) : setControlIsActive(!controlIsActive);
+  };
 
   return (
     <Paper className={ classnames(controls, currentTheme === 'dark' ? paperDark : paperLight) }>
@@ -29,6 +42,7 @@ const Reel = ({
         <Typography style={ getTypographyStyle(currentTheme) } variant='h6'>Reel Controls</Typography>
         <SwitchButton action={ controlStateChanged } isChecked={ controlIsActive } />
       </div>
+
       <div className={ group }>
         <Typography className={ reelName } style={ getTypographyStyle(currentTheme) } variant='body1'>Reel 1</Typography>
         <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
@@ -37,8 +51,7 @@ const Reel = ({
           InputProps={{ classes: { underline }}}
           SelectProps={{
             MenuProps: { className: menu, classes: { paper: currentTheme === 'dark' ? paperDark : paperLight }},
-            inputProps: { classes: { root: input }},
-            classes: { icon: menuIcon }
+            inputProps: { classes: { root: input }}, classes: { icon: menuIcon }
           }}
         >
           { REEL_SYMBOLS.map(symbol => <MenuItem key={ symbol } value={ symbol }>{ symbol }</MenuItem>) }
@@ -49,13 +62,13 @@ const Reel = ({
           InputProps={{ classes: { underline }}}
           SelectProps={{
             MenuProps: { className: menu, classes: { paper: currentTheme === 'dark' ? paperDark : paperLight }},
-            inputProps: { classes: { root: input }},
-            classes: { icon: menuIcon }
+            inputProps: { classes: { root: input }}, classes: { icon: menuIcon }
           }}
         >
           { REEL_POSITIONS.map(position => <MenuItem key={ position } value={ position }>{ position }</MenuItem>) }
         </TextField>
       </div>
+
       <div className={ group }>
         <Typography className={ reelName } style={ getTypographyStyle(currentTheme) } variant='body1'>Reel 2</Typography>
         <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
@@ -64,8 +77,7 @@ const Reel = ({
           InputProps={{ classes: { underline }}}
           SelectProps={{
             MenuProps: { className: menu, classes: { paper: currentTheme === 'dark' ? paperDark : paperLight }},
-            inputProps: { classes: { root: input }},
-            classes: { icon: menuIcon }
+            inputProps: { classes: { root: input }}, classes: { icon: menuIcon }
           }}
         >
           { REEL_SYMBOLS.map(symbol => <MenuItem key={ symbol } value={ symbol }>{ symbol }</MenuItem>) }
@@ -76,13 +88,13 @@ const Reel = ({
           InputProps={{ classes: { underline }}}
           SelectProps={{
             MenuProps: { className: menu, classes: { paper: currentTheme === 'dark' ? paperDark : paperLight }},
-            inputProps: { classes: { root: input }},
-            classes: { icon: menuIcon }
+            inputProps: { classes: { root: input }}, classes: { icon: menuIcon }
           }}
         >
           { REEL_POSITIONS.map(position => <MenuItem key={ position } value={ position }>{ position }</MenuItem>) }
         </TextField>
       </div>
+
       <div className={ group }>
         <Typography className={ reelName } style={ getTypographyStyle(currentTheme) } variant='body1'>Reel 3</Typography>
         <TextField id='symbol' label='Symbol' className={ textFieldFull } select disabled={ !controlIsActive && !isSpinning }
@@ -91,8 +103,7 @@ const Reel = ({
           InputProps={{ classes: { underline }}}
           SelectProps={{
             MenuProps: { className: menu, classes: { paper: currentTheme === 'dark' ? paperDark : paperLight }},
-            inputProps: { classes: { root: input }},
-            classes: { icon: menuIcon }
+            inputProps: { classes: { root: input }}, classes: { icon: menuIcon }
           }}
         >
           { REEL_SYMBOLS.map(symbol => <MenuItem key={ symbol } value={ symbol }>{ symbol }</MenuItem>) }
@@ -103,8 +114,7 @@ const Reel = ({
           InputProps={{ classes: { underline }}}
           SelectProps={{
             MenuProps: { className: menu, classes: { paper: currentTheme === 'dark' ? paperDark : paperLight }},
-            inputProps: { classes: { root: input }},
-            classes: { icon: menuIcon }
+            inputProps: { classes: { root: input }}, classes: { icon: menuIcon }
           }}
         >
           { REEL_POSITIONS.map(position => <MenuItem key={ position } value={ position }>{ position }</MenuItem>) }

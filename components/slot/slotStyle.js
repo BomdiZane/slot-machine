@@ -14,7 +14,7 @@ const slotStyle = theme =>  ({
     position: 'relative',
     width: '100%',
     height: '242px',
-    overflow: 'hidden',
+    margin: '20px 0',
     borderRadius: 'var(--default-radius)',
     display: 'flex',
     justifyContent: 'space-between',
@@ -37,6 +37,7 @@ const slotStyle = theme =>  ({
   topDivider: { top: '25%' },
   middleDivider: { top: '50%' },
   bottomDivider: { top: '75%' },
+  activeReelLine: { backgroundColor: 'var(--cyan) !important' },
   ...templateStyles.input,
   ...templateStyles.paper,
 });

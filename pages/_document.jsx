@@ -1,10 +1,10 @@
 /** DOM Skeleton
   *
-  * A HOC that wraps the app in a configured HTML structure
+  * A HOC that wraps the app in a boilerplate HTML skeleton
   *
   * @version 1.0.0
   * @created - 2019.12.22
-  * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://portfolio.bomdi.now.sh)
+  * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://bomdisoft.com)
   */
 
 import Document, { Head, Main, NextScript } from 'next/document';
@@ -27,14 +27,14 @@ class SlotMachineDocument extends Document {
           <meta name='viewport' content='minimum-scale=1, initial-scale=1' />
           <meta name='theme-color' content={ main } />
 
-          <meta name="apple-mobile-web-app-title" content={ process.env.APP_NAME } />
-          <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="mobile-web-app-capable" content="yes" />
+          <meta name='apple-mobile-web-app-title' content={ process.env.APP_NAME } />
+          <meta name='apple-mobile-web-app-status-bar-style' content='default' />
+          <meta name='apple-mobile-web-app-capable' content='yes' />
+          <meta name='mobile-web-app-capable' content='yes' />
 
-          <link rel="manifest" href="/manifest.json" />
+          <link rel='manifest' href='/manifest.json' />
           <link rel='icon' type='image/x-icon' href={ LOGO } />
-          <link rel="apple-touch-icon" href={ LOGO } />
+          <link rel='apple-touch-icon' href={ LOGO } />
           <link rel='stylesheet' type='text/css' href='/nprogress.css' />
           <link rel='stylesheet' href='https://fonts.googleapis.com/icon?family=Material+Icons' />
           <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.1/css/all.css' integrity='sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf' crossOrigin='anonymous' />

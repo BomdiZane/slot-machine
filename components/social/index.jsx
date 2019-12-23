@@ -1,3 +1,12 @@
+/** SOCIAL
+  *
+  * This component presents social media accounts to the client
+  *
+  * @version 1.0.0
+  * @created - 2019.12.22
+  * @author - Adombang Munang Mbomndih (Bomdi) <dzedock@yahoo.com> (https://bomdisoft.com)
+  */
+
 //#region imports
 import { getSocialIconStyle } from '../../style/dynamicStyle';
 import socialStyle from './socialStyle';
