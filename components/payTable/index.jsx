@@ -14,10 +14,13 @@ import compose from 'recompose/compose';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@material-ui/core';
+
+import { addCurrencyFormat } from '../../utils/helpers';
 //#endregion
 
 const PayTable = ({
-  body: { currentTheme }, payTable: { winRows }, slot: { isSpinning }, classes: { table, paperDark, paperLight, header, winRow }
+  body: { currentTheme }, payTable: { winRows, lastReward }, slot: { isSpinning },
+  classes: { table, paperDark, paperLight, header, winRow, historyDiv, label, reward }
 }) => {
   const rows = [
     { combination: '3 CHERRY symbols', line: 'Bottom', reward: 4000 },
@@ -36,6 +39,10 @@ const PayTable = ({
   return (
     <TableContainer className={ classnames(table, currentTheme === 'dark' ? paperDark : paperLight) } component={ Paper }>
       <Typography className={ header } style={ typographyStyle } variant='h6'>Pay Table</Typography>
+      <div className={ historyDiv }>
+        <Typography className={ label } style={ typographyStyle } variant='body1'>Last reward: </Typography>
+        <Typography className={ reward } style={ typographyStyle } variant='body1'>{ lastReward ? addCurrencyFormat(lastReward) : '€0.0' }</Typography>
+      </div>
       <Table size='small' aria-label='Pay Table'>
         <TableHead>
           <TableRow>
@@ -67,6 +74,7 @@ PayTable.propTypes = {
   }),
   payTable: PropTypes.shape({
     winRows: PropTypes.array.isRequired,
+    lastReward: PropTypes.number.isRequired,
   }),
   slot: PropTypes.shape({
     isSpinning: PropTypes.bool.isRequired,

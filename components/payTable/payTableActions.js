@@ -5,6 +5,13 @@ export function setWinRows(rowIDs=['x']) {
   };
 }
 
+export function setLastReward(amount=0) {
+  return {
+    type: 'SET_LAST_REWARD',
+    payload: amount
+  };
+}
+
 export function addWinRow(value) {
   return {
     type: 'ADD_WIN_ROW',

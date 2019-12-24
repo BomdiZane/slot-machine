@@ -30,6 +30,17 @@ export function storageAvailable(type) {
   }
 }
 
+export function addCurrencyFormat(amount, currencyCode='EUR'){
+  // Assumption: all amounts are in base currency unit (dollar/euro not cents)
+  if (!amount || typeof(amount) !== 'number') return 'Invalid amount';
+  if (typeof(currencyCode) !== 'string') return 'Invalid currency code';
+
+  return new Intl.NumberFormat('en-US', {
+    style : 'currency',
+    currency : currencyCode.toUpperCase()
+  }).format(amount);
+}
+
 export function getRandomInt(max, min = 0){
   if (!max || typeof(max) !== 'number' || typeof(min) !== 'number') return 0;
 

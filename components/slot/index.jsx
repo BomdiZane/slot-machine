@@ -23,16 +23,16 @@ import Dividers from './dividers';
 import Button from '../button';
 
 import { togglePopup } from '../popup/popupActions';
-import { setWinRows } from '../payTable/payTableActions';
+import { setWinRows, setLastReward } from '../payTable/payTableActions';
 import { setIsSpinning, setWinPositions } from './slotActions';
-import { initializeOptions, getRandomInt } from '../../utils/helpers';
+import { initializeOptions, getRandomInt, addCurrencyFormat } from '../../utils/helpers';
 import {
   MIN_BALANCE, MAX_BALANCE, SPIN_COST, REEL_SYMBOLS, REEL_BAR_SYMBOLS, REEL_POSITIONS, SYMBOL_HEIGHT, SPIN_DURATION
 } from '../../utils/constants';
 //#endregion
 
 const Slot = ({
-  body: { currentTheme }, slot: { isSpinning }, setWinPositions,
+  body: { currentTheme }, slot: { isSpinning }, setWinPositions, setLastReward,
   reel: { controlIsActive, reel: { reelOne, reelTwo, reelThree }}, togglePopup, setIsSpinning, setWinRows,
   classes: { slot, controls, board, textFieldSmall, underline, darkLabel, adornment, paperDark, paperLight }
 }) => {
@@ -45,6 +45,8 @@ const Slot = ({
 
   const balanceChanged = e => {
     if (isSpinning) return togglePopup({ open: true, variant: 'error', message: 'Please wait...' });
+    if (Number(e.target.value) > MAX_BALANCE)
+      return togglePopup({ open: true, variant: 'error', message: `Cannot refill above ${ addCurrencyFormat(MAX_BALANCE) }` });
 
     let options = initializeOptions(e.target.value);
     if (!Number(options.value) || Number(options.value) <= MIN_BALANCE || Number(options.value) > MAX_BALANCE) options.isValid = false;
@@ -102,6 +104,7 @@ const Slot = ({
     setBalance(initializeOptions(balance.value + newReward - SPIN_COST));
     setWinPositions(newWinPositions);
     setWinRows(newWinRows);
+    setLastReward(newReward);
   };
 
   const computeResults = results => {
@@ -116,11 +119,6 @@ const Slot = ({
     const reelTwoSymbol = reelTwoResults.symbol;
     const reelThreeSymbol = reelThreeResults.symbol;
 
-    console.log('VALUES: ');
-    console.log('reelOneResults symbol: ' + reelOneSymbol + ', reelOneResults position: ' + reelOnePosition);
-    console.log('reelTwoResults symbol: ' + reelTwoSymbol + ', reelTwoResults position: ' + reelTwoPosition);
-    console.log('reelThreeResults symbol: ' + reelThreeSymbol + ', reelThreeResults position: ' + reelThreePosition);
-
     const updateVariables = (reward, winRow, winPosition) => {
       newReward += reward;
       newWinRows.push(winRow);
@@ -132,6 +130,15 @@ const Slot = ({
       if (REEL_BAR_SYMBOLS.includes(symbol1) && REEL_BAR_SYMBOLS.includes(symbol2)) updateVariables(5, 9, position);
       // Any combination of non-BAR symbols (CHERRY, 7)?
       else if (!REEL_BAR_SYMBOLS.includes(symbol1) && !REEL_BAR_SYMBOLS.includes(symbol2) && symbol1 !== symbol2) updateVariables(75, 5, position);
+    };
+
+    const isSpecialCombo = (symbol1, symbol2) => {
+      // if symbols are both included in or both excluded from the REEL_BAR_SYMBOLS collection, they must be a special combo pair
+      return (
+        (REEL_BAR_SYMBOLS.includes(symbol1) && REEL_BAR_SYMBOLS.includes(symbol2))
+        ||
+        (!REEL_BAR_SYMBOLS.includes(symbol1) && !REEL_BAR_SYMBOLS.includes(symbol2) && symbol1 !== symbol2)
+      );
     };
 
     const getReelTopSymbol = reel => {
@@ -189,7 +196,8 @@ const Slot = ({
         // If the symbols are not the same, we check if there is a special 'mixed type' match
         else {
           checkSpecialCombos(reelOneSymbol, reelTwoSymbol, 'center');
-          if (reelThreePosition === 'center') checkSpecialCombos(reelOneSymbol, reelThreeSymbol, 'center');
+          if (reelThreePosition === 'center' && !isSpecialCombo(reelOneSymbol, reelTwoSymbol))
+            checkSpecialCombos(reelOneSymbol, reelThreeSymbol, 'center');
         }
       }
       else if (reelThreePosition === 'center') checkSpecialCombos(reelOneSymbol, reelThreeSymbol, 'center');
@@ -212,7 +220,8 @@ const Slot = ({
         }
         else {
           checkSpecialCombos(reelOneSymbol, reelTwoTopSymbol, 'top');
-          if (reelThreePosition !== 'center') checkSpecialCombos(reelOneSymbol, reelThreeTopSymbol, 'top');
+          if (reelThreePosition !== 'center' && !isSpecialCombo(reelOneSymbol, reelTwoTopSymbol))
+            checkSpecialCombos(reelOneSymbol, reelThreeTopSymbol, 'top');
         }
 
         if (reelOneBottomSymbol === reelTwoBottomSymbol) {
@@ -224,7 +233,8 @@ const Slot = ({
         }
         else {
           checkSpecialCombos(reelOneBottomSymbol, reelTwoBottomSymbol, 'bottom');
-          if (reelThreePosition !== 'center') checkSpecialCombos(reelOneBottomSymbol, reelThreeBottomSymbol, 'bottom');
+          if (reelThreePosition !== 'center' && !isSpecialCombo(reelOneBottomSymbol, reelTwoBottomSymbol))
+            checkSpecialCombos(reelOneBottomSymbol, reelThreeBottomSymbol, 'bottom');
         }
       }
       else if (reelThreePosition !== 'center'){
@@ -252,7 +262,8 @@ const Slot = ({
         }
         else {
           checkSpecialCombos(reelOneSymbol, reelTwoBottomSymbol, 'bottom');
-          if (reelThreePosition !== 'center') checkSpecialCombos(reelOneSymbol, reelThreeBottomSymbol, 'bottom');
+          if (reelThreePosition !== 'center' && !isSpecialCombo(reelOneSymbol, reelTwoBottomSymbol))
+            checkSpecialCombos(reelOneSymbol, reelThreeBottomSymbol, 'bottom');
         }
 
         if (reelOneTopSymbol === reelTwoTopSymbol) {
@@ -264,7 +275,8 @@ const Slot = ({
         }
         else {
           checkSpecialCombos(reelOneTopSymbol, reelTwoTopSymbol, 'top');
-          if (reelThreePosition !== 'center') checkSpecialCombos(reelOneTopSymbol, reelThreeTopSymbol, 'top');
+          if (reelThreePosition !== 'center' && !isSpecialCombo(reelOneTopSymbol, reelTwoTopSymbol))
+            checkSpecialCombos(reelOneTopSymbol, reelThreeTopSymbol, 'top');
         }
       }
       else if (reelThreePosition !== 'center'){
@@ -291,8 +303,10 @@ const Slot = ({
         let reelTwoBottomSymbol = getReelBottomSymbol(reelTwoResults);
 
         // We already handled triple combos above. Here we only want special matches between reelTwo and reelThree
-        if (reelTwoSymbol !== reelOneTopSymbol) checkSpecialCombos(reelTwoSymbol, reelThreeTopSymbol, 'top');
-        if (reelTwoBottomSymbol !== reelOneBottomSymbol) checkSpecialCombos(reelTwoBottomSymbol, reelThreeBottomSymbol, 'bottom');
+        if (reelOnePosition === 'center' || !isSpecialCombo(reelTwoSymbol, reelOneTopSymbol))
+          checkSpecialCombos(reelTwoSymbol, reelThreeTopSymbol, 'top');
+        if (reelOnePosition === 'center' || !isSpecialCombo(reelTwoBottomSymbol, reelOneBottomSymbol))
+          checkSpecialCombos(reelTwoBottomSymbol, reelThreeBottomSymbol, 'bottom');
       }
     }
 
@@ -305,8 +319,10 @@ const Slot = ({
         let reelTwoTopSymbol = getReelTopSymbol(reelTwoResults);
 
         // We already handled triple combos above. Here we only want special matches between reelTwo and reelThree
-        if (reelTwoSymbol !== reelOneBottomSymbol) checkSpecialCombos(reelTwoSymbol, reelThreeBottomSymbol, 'bottom');
-        if (reelTwoTopSymbol !== reelOneTopSymbol) checkSpecialCombos(reelTwoTopSymbol, reelThreeTopSymbol, 'top');
+        if (reelOnePosition === 'center' || !isSpecialCombo(reelTwoSymbol, reelOneBottomSymbol))
+          checkSpecialCombos(reelTwoSymbol, reelThreeBottomSymbol, 'bottom');
+        if (reelOnePosition === 'center' || !isSpecialCombo(reelTwoTopSymbol, reelOneTopSymbol))
+          checkSpecialCombos(reelTwoTopSymbol, reelThreeTopSymbol, 'top');
       }
     }
 
@@ -359,6 +375,7 @@ Slot.propTypes = {
   setIsSpinning: PropTypes.func.isRequired,
   setWinPositions: PropTypes.func.isRequired,
   setWinRows: PropTypes.func.isRequired,
+  setLastReward: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -372,6 +389,7 @@ const mapDispatchToProps = dispatch => ({
   setIsSpinning: value => dispatch(setIsSpinning(value)),
   setWinPositions: positions => dispatch(setWinPositions(positions)),
   setWinRows: rowIDs => dispatch(setWinRows(rowIDs)),
+  setLastReward: amount => dispatch(setLastReward(amount)),
 });
 
 export default compose(
