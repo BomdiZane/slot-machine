@@ -17,7 +17,7 @@ import { withStyles, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 //#endregion
 
 const PayTable = ({
-  body: { currentTheme }, payTable: { winRows }, classes: { table, paperDark, paperLight, header, winRow }
+  body: { currentTheme }, payTable: { winRows }, slot: { isSpinning }, classes: { table, paperDark, paperLight, header, winRow }
 }) => {
   const rows = [
     { combination: '3 CHERRY symbols', line: 'Bottom', reward: 4000 },
@@ -47,7 +47,7 @@ const PayTable = ({
         <TableBody>
           {
             rows.map((row, index) => (
-              <TableRow key={ row.combination } className={ winRows.includes(index + 1) ? winRow : '' }>
+              <TableRow key={ index } className={ !isSpinning && winRows.includes(index + 1) ? winRow : '' }>
                 <TableCell style={ typographyStyle }>{ row.combination }</TableCell>
                 <TableCell style={ typographyStyle }>{ row.line }</TableCell>
                 <TableCell style={ typographyStyle } align='right'>{ row.reward }</TableCell>
@@ -68,11 +68,15 @@ PayTable.propTypes = {
   payTable: PropTypes.shape({
     winRows: PropTypes.array.isRequired,
   }),
+  slot: PropTypes.shape({
+    isSpinning: PropTypes.bool.isRequired,
+  }),
 };
 
 const mapStateToProps = state => ({
   body: state.body,
   payTable: state.payTable,
+  slot: state.slot,
 });
 
 export default compose(

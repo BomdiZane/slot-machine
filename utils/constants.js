@@ -10,6 +10,7 @@ module.exports = {
   },
   ALLOWED_THEMES: ['light', 'dark'],
   REEL_SYMBOLS: ['BAR', '2xBAR', '3xBAR', '7', 'CHERRY'],
+  REEL_BAR_SYMBOLS: ['BAR', '2xBAR', '3xBAR'],
   REEL_POSITIONS: ['Top', 'Center', 'Bottom'],
   MIN_BALANCE: 0,
   MAX_BALANCE: 5000,

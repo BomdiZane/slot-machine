@@ -1,5 +1,7 @@
+import update from 'immutability-helper';
+
 const defaultState = {
-  winRows: [1, 5, '8']
+  winRows: []
 };
 
 const payTableReducer = (state = defaultState, action) => {
@@ -9,6 +11,9 @@ const payTableReducer = (state = defaultState, action) => {
         ...state,
         winRows: action.payload,
       };
+      break;
+    case 'ADD_WIN_ROW':
+      state = update(state, { winRows: { $push: [action.payload] }});
       break;
   }
   return state;

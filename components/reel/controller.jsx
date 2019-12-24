@@ -131,9 +131,9 @@ Reel.propTypes = {
   }),
   reel: PropTypes.shape({
     reel: PropTypes.shape({
-      reelOne: PropTypes.string.isRequired,
-      reelTwo: PropTypes.string.isRequired,
-      reelThree: PropTypes.string.isRequired,
+      reelOne: PropTypes.object.isRequired,
+      reelTwo: PropTypes.object.isRequired,
+      reelThree: PropTypes.object.isRequired,
     }),
     controlIsActive: PropTypes.bool.isRequired,
   }),

@@ -65,7 +65,7 @@ const GLOBALS = () =>
       }
 
       @keyframes blink {
-        to { background: var(--medium-blue); }
+        to { background: var(--cyan); }
       }
 
       :root {

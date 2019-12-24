@@ -88,6 +88,7 @@ const templateStyles = {
       '&:hover': { color: 'var(--mobile) !important' }
     },
   },
+  blink: { animation: 'blink 1.5s infinite' },
   icon: {
     fontSize: '16px',
     margin: '5px'
