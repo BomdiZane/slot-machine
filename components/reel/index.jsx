@@ -22,9 +22,11 @@ import { SYMBOL_HEIGHT, REEL_SYMBOLS, SPIN_DURATION } from '../../utils/constant
 //#endregion
 
 const Reel = ({ scrollBy, spinStopDelay, body: { currentTheme }, slot: { isSpinning }, classes: { reel, scrollHide, cannotScroll, symbol }}) => {
-  const NUMBER_OF_ROWS = REEL_SYMBOLS.length + 2; // 2 offset symbols, one at start and one at end of reel
+  // Add top offset - this prevents a blank space from showing at the reel top when the first symbol is displayed in the middle or bottom positions
+  // Add bottom offset - this prevents a blank space from showing at the reel bottom when the last symbol is displayed in the middle or top positions
+  const REEL_SYMBOLS_WITH_OFFSET = [REEL_SYMBOLS[REEL_SYMBOLS.length - 1], ...REEL_SYMBOLS, REEL_SYMBOLS[0]];
+  const NUMBER_OF_ROWS = REEL_SYMBOLS_WITH_OFFSET.length;
   const ITERATIONS = 15;
-  const OFFSET = SYMBOL_HEIGHT;
 
   const generateRefs = numberOfRefs => {
     let refs = [];
@@ -40,7 +42,7 @@ const Reel = ({ scrollBy, spinStopDelay, body: { currentTheme }, slot: { isSpinn
   // N.B: this means we have a re-render on every click of the spin button, but that's okay.
   reelRefs.forEach(reelRef => {
     isSpinning && reelRef.current && reelRef.current.animate(
-      { top: [0, `-${ (NUMBER_OF_ROWS * SYMBOL_HEIGHT) - OFFSET }px`, `${ scrollBy }px`] },
+      { top: [0, `-${ (NUMBER_OF_ROWS * SYMBOL_HEIGHT) - SYMBOL_HEIGHT }px`, `${ scrollBy }px`] }, // subtract SYMBOL_HEIGHT to compensate for offset
       {
         duration: (SPIN_DURATION + spinStopDelay) / ITERATIONS,
         iterations: ITERATIONS,
@@ -53,15 +55,11 @@ const Reel = ({ scrollBy, spinStopDelay, body: { currentTheme }, slot: { isSpinn
   return (
     <div className={ scrollHide }>
       <div className={ classnames(reel, cannotScroll) } style={ getBackground(currentTheme) }>
-        {/* Add top offset - this prevents a blank space from showing at the reel top when the first symbol is displayed in the middle or bottom positions */}
-        <img className={ symbol } ref={ reelRefs[0] } src={`/${ REEL_SYMBOLS[REEL_SYMBOLS.length - 1] }.png`} alt='symbol image'/>
         {
-          REEL_SYMBOLS.map(
-            (reelSymbol, index) => <img key={ index } className={ symbol } ref={ reelRefs[index + 1] } src={`/${ reelSymbol }.png`} alt='symbol image' />
+          REEL_SYMBOLS_WITH_OFFSET.map(
+            (reelSymbol, index) => <img key={ index } className={ symbol } ref={ reelRefs[index] } src={`/${ reelSymbol }.png`} alt='symbol image' />
           )
         }
-        {/* Add bottom offset - this prevents a blank space from showing at the reel bottom when the last symbol is displayed in the middle or top positions */}
-        <img className={ symbol } ref={ reelRefs[NUMBER_OF_ROWS - 1] } src={`/${ REEL_SYMBOLS[0] }.png`} alt='symbol image'/>
       </div>
     </div>
   );

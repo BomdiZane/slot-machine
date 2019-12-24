@@ -189,7 +189,7 @@ const Slot = ({
         // If the symbols are not the same, we check if there is a special 'mixed type' match
         else {
           checkSpecialCombos(reelOneSymbol, reelTwoSymbol, 'center');
-          checkSpecialCombos(reelOneSymbol, reelThreeSymbol, 'center');
+          if (reelThreePosition === 'center') checkSpecialCombos(reelOneSymbol, reelThreeSymbol, 'center');
         }
       }
       else if (reelThreePosition === 'center') checkSpecialCombos(reelOneSymbol, reelThreeSymbol, 'center');
@@ -200,28 +200,32 @@ const Slot = ({
       if (reelTwoPosition !== 'center'){
         let reelTwoTopSymbol = getReelTopSymbol(reelTwoResults);
         let reelTwoBottomSymbol = getReelBottomSymbol(reelTwoResults);
+        let reelThreeTopSymbol = getReelTopSymbol(reelThreeResults);
+        let reelThreeBottomSymbol = getReelBottomSymbol(reelThreeResults);
 
         if (reelOneSymbol === reelTwoTopSymbol) {
           if (reelThreePosition !== 'center'){
-            let reelThreeTopSymbol = getReelTopSymbol(reelThreeResults);
-
             if (reelOneSymbol === reelThreeTopSymbol) handleTripleMatch(reelOneSymbol, 'top');
             else if (REEL_BAR_SYMBOLS.includes(reelOneSymbol) && REEL_BAR_SYMBOLS.includes(reelTwoTopSymbol)) updateVariables(5, 9, 'top');
           }
           else if (REEL_BAR_SYMBOLS.includes(reelOneSymbol) && REEL_BAR_SYMBOLS.includes(reelTwoTopSymbol)) updateVariables(5, 9, 'top');
         }
-        else checkSpecialCombos(reelOneSymbol, reelTwoTopSymbol, 'top');
+        else {
+          checkSpecialCombos(reelOneSymbol, reelTwoTopSymbol, 'top');
+          if (reelThreePosition !== 'center') checkSpecialCombos(reelOneSymbol, reelThreeTopSymbol, 'top');
+        }
 
         if (reelOneBottomSymbol === reelTwoBottomSymbol) {
           if (reelThreePosition !== 'center'){
-            let reelThreeBottomSymbol = getReelBottomSymbol(reelThreeResults);
-
             if (reelOneBottomSymbol === reelThreeBottomSymbol) handleTripleMatch(reelOneBottomSymbol, 'bottom');
             else if (REEL_BAR_SYMBOLS.includes(reelOneBottomSymbol) && REEL_BAR_SYMBOLS.includes(reelTwoBottomSymbol)) updateVariables(5, 9, 'bottom');
           }
           else if (REEL_BAR_SYMBOLS.includes(reelOneBottomSymbol) && REEL_BAR_SYMBOLS.includes(reelTwoBottomSymbol)) updateVariables(5, 9, 'bottom');
         }
-        else checkSpecialCombos(reelOneBottomSymbol, reelTwoBottomSymbol, 'bottom');
+        else {
+          checkSpecialCombos(reelOneBottomSymbol, reelTwoBottomSymbol, 'bottom');
+          if (reelThreePosition !== 'center') checkSpecialCombos(reelOneBottomSymbol, reelThreeBottomSymbol, 'bottom');
+        }
       }
       else if (reelThreePosition !== 'center'){
         let reelThreeTopSymbol = getReelTopSymbol(reelThreeResults);
@@ -236,28 +240,32 @@ const Slot = ({
       if (reelTwoPosition !== 'center'){
         let reelTwoBottomSymbol = getReelBottomSymbol(reelTwoResults);
         let reelTwoTopSymbol = getReelTopSymbol(reelTwoResults);
+        let reelThreeBottomSymbol = getReelBottomSymbol(reelThreeResults);
+        let reelThreeTopSymbol = getReelTopSymbol(reelThreeResults);
 
         if (reelOneSymbol === reelTwoBottomSymbol) {
           if (reelThreePosition !== 'center'){
-            let reelThreeBottomSymbol = getReelBottomSymbol(reelThreeResults);
-
             if (reelOneSymbol === reelThreeBottomSymbol) handleTripleMatch(reelOneSymbol, 'bottom');
             else if (REEL_BAR_SYMBOLS.includes(reelOneSymbol) && REEL_BAR_SYMBOLS.includes(reelTwoBottomSymbol)) updateVariables(5, 9, 'bottom');
           }
           else if (REEL_BAR_SYMBOLS.includes(reelOneSymbol) && REEL_BAR_SYMBOLS.includes(reelTwoBottomSymbol)) updateVariables(5, 9, 'bottom');
         }
-        else checkSpecialCombos(reelOneSymbol, reelTwoBottomSymbol, 'bottom');
+        else {
+          checkSpecialCombos(reelOneSymbol, reelTwoBottomSymbol, 'bottom');
+          if (reelThreePosition !== 'center') checkSpecialCombos(reelOneSymbol, reelThreeBottomSymbol, 'bottom');
+        }
 
         if (reelOneTopSymbol === reelTwoTopSymbol) {
           if (reelThreePosition !== 'center'){
-            let reelThreeTopSymbol = getReelTopSymbol(reelThreeResults);
-
             if (reelOneTopSymbol === reelThreeTopSymbol) handleTripleMatch(reelOneTopSymbol, 'top');
             else if (REEL_BAR_SYMBOLS.includes(reelOneTopSymbol) && REEL_BAR_SYMBOLS.includes(reelTwoTopSymbol)) updateVariables(5, 9, 'top');
           }
           else if (REEL_BAR_SYMBOLS.includes(reelOneTopSymbol) && REEL_BAR_SYMBOLS.includes(reelTwoTopSymbol)) updateVariables(5, 9, 'top');
         }
-        else checkSpecialCombos(reelOneTopSymbol, reelTwoTopSymbol, 'top');
+        else {
+          checkSpecialCombos(reelOneTopSymbol, reelTwoTopSymbol, 'top');
+          if (reelThreePosition !== 'center') checkSpecialCombos(reelOneTopSymbol, reelThreeTopSymbol, 'top');
+        }
       }
       else if (reelThreePosition !== 'center'){
         let reelThreeTopSymbol = getReelTopSymbol(reelThreeResults);
@@ -269,7 +277,7 @@ const Slot = ({
 
     // At this point we have handled all possible matches that involve reelOne.
     // Now we look at possible matches between reelTwo and reelThree only
-    if (reelTwoPosition === 'center' && reelThreePosition === 'center'  && reelOnePosition !== 'center'){
+    if (reelTwoPosition === 'center' && reelThreePosition === 'center'  && (reelOnePosition !== 'center' || reelOneSymbol !== reelTwoSymbol)){
       // A reel at the center can only match a sibling reel iff the sibling is also positioned at the center
       checkSpecialCombos(reelTwoSymbol, reelThreeSymbol, 'center');
     }
