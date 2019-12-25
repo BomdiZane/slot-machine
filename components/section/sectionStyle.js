@@ -2,7 +2,7 @@ const sectionStyle = theme => ({
   root: {
     width: '100%',
     maxWidth: '1800px',
-    padding: '8%',
+    padding: '6% 8%',
     '@media (max-width: 770px)': {
       padding: '5%',
     }
