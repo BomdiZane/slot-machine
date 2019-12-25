@@ -3,7 +3,7 @@ version: '3.7'
 services:
   web-app:
     container_name: slot-machine
-    image: node:10.15.3
+    image: node:12.14.0
     restart: always
     working_dir: /usr/app/
     volumes:

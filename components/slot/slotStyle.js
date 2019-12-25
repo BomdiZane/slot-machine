@@ -8,6 +8,7 @@ const slotStyle = theme =>  ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: '10px',
+    margin: '10px',
     paddingBottom: 0,
   },
   board: {

@@ -37,13 +37,13 @@ const reelStyle = theme =>  ({
   cannotScroll: { overflow: 'hidden' },
   symbol: { position: 'relative' },
   controls: {
-    width: '100%',
+    width: '460px',
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     flexWrap: 'wrap',
     padding: '10px',
-    marginTop: '20px',
+    margin: '10px',
   },
   group: {
     width: '32%',

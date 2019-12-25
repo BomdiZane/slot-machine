@@ -1,6 +1,6 @@
 # [Slot Machine](https://igame.bomdisoft.com/)
 
-Slot Machine test app
+Slot Machine test app. Live [here](https://igame.bomdisoft.com/)
 
 
 ## First Run

@@ -2,9 +2,9 @@ const sectionStyle = theme => ({
   root: {
     width: '100%',
     maxWidth: '1800px',
-    padding: '20px 8%',
+    padding: '8%',
     '@media (max-width: 770px)': {
-      padding: '20px 5%',
+      padding: '5%',
     }
   },
   header: {

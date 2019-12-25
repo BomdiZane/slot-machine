@@ -3,6 +3,7 @@ import templateStyles from '../../style/template';
 const payTableStyle = theme =>  ({
   table: {
     width: '460px',
+    margin: '10px',
     position: 'relative'
   },
   header: templateStyles.header,
