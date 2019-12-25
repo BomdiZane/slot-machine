@@ -1,7 +1,6 @@
 //#region imports
 import headerStyle from './headerStyle';
 
-import Link from 'next/link';
 import { connect } from 'react-redux';
 import compose from 'recompose/compose';
 import classnames from 'classnames';
@@ -12,7 +11,6 @@ import HideOnScroll from './hideOnScroll';
 
 import { toggleTheme } from '../body/bodyActions';
 import { LOGO } from '../../utils/constants';
-const pageURL = require('../../utils/pageURL');
 //#endregion
 
 const Header = (props) => {
@@ -29,13 +27,9 @@ const Header = (props) => {
     <HideOnScroll { ...props }>
       <AppBar className={ appBar } >
         <Toolbar>
-          <Link href={ pageURL.home.url } as={ pageURL.home.as } passHref>
-            <Avatar alt='logo' src={ LOGO } className={ logo } />
-          </Link>
+          <Avatar alt='logo' src={ LOGO } className={ logo } />
           <div className={ barRight }>
-            <Link href={ pageURL.home.url } as={ pageURL.home.as } passHref>
-              <Typography variant='h6' color='inherit' className={ appName } noWrap>{ process.env.APP_NAME }</Typography>
-            </Link>
+            <Typography variant='h6' color='inherit' className={ appName } noWrap>{ process.env.APP_NAME }</Typography>
             <Tooltip title={`Switch to ${ currentTheme === 'light' ? 'dark' : 'light' } theme`} placement='right'>
               <IconButton className={ themeButton } onClick={ themeChanged }>
                 {

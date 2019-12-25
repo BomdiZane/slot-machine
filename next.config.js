@@ -7,7 +7,7 @@ const nextConfig = {
     DESCRIPTION: 'Slot Machine test app',
     KEYWORDS: 'Games, JavaScript Development, Web Development, JavaScript, Web, Developer, Frontend, Backend, Cloud, Databases, Version Control, Data Formats, Testing, Deployment',
     URL: 'http://localhost:3000',
-    AUTHOR: 'Bomdi Munang <dzedock@yahoo.com> (https://bomdisoft.com)',
+    AUTHOR: 'Adombang Munang Mbomndih <dzedock@yahoo.com> (https://bomdisoft.com)',
 
     USER_THEME_KEY: 'userTheme'
   },

@@ -14,9 +14,9 @@ const { Builder } = require('selenium-webdriver'),
     console.log('Starting homeTests with firefoxDriver...');
     await homeTests(firefoxDriver, WAIT_DURATION);
 
-    edgeDriver = await new Builder().forBrowser('MicrosoftEdge').build();
-    console.log('Starting homeTests with edgeDriver...');
-    await homeTests(edgeDriver, WAIT_DURATION);
+    // edgeDriver = await new Builder().forBrowser('MicrosoftEdge').build();
+    // console.log('Starting homeTests with edgeDriver...');
+    // await homeTests(edgeDriver, WAIT_DURATION);
   }
   catch(e) { console.error(e); }
   finally {

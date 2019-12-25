@@ -1,11 +1,11 @@
 {
-  "name": "Reel",
-  "short_name": "Reel",
+  "name": "Slot Machine",
+  "short_name": "Slot",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#1f2933",
   "theme_color": "#1f2933",
-  "description": "Reel test app",
+  "description": "Slot machine test app",
   "icons": [
     {
       "src": "https://firebasestorage.googleapis.com/v0/b/bomdisoft.appspot.com/o/logos%2Flogo%20icon%20white%20-%20192.png?alt=media&token=22b4f93a-6535-443a-896f-05c445247e87",

@@ -14,9 +14,7 @@ import GLOBAL_STYLES from '../style/globals';
 
 // import { StrictMode } from 'react';
 import App from 'next/app';
-import Router from 'next/router';
 import { Provider } from 'react-redux';
-import NProgress from 'nprogress';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import withRedux from 'next-redux-wrapper';
@@ -33,10 +31,6 @@ import { ALLOWED_THEMES } from '../utils/constants';
 
 const composeEnhancers = typeof window != 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const makeStore = (initialState, options) => createStore(rootReducer, initialState, composeEnhancers(applyMiddleware(thunk)));
-
-Router.events.on('routeChangeStart', url => NProgress.start());
-Router.events.on('routeChangeComplete', () => NProgress.done());
-Router.events.on('routeChangeError', () => NProgress.done());
 
 class SlotMachine extends App {
   constructor() { super(); }

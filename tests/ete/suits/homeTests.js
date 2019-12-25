@@ -5,8 +5,8 @@ const homeTests = async function(driver, WAIT_DURATION = 60000) {
   if (!driver) throw('No driver provided!');
 
   try {
-    await driver.get(process.env.APP_URL);
-    await driver.wait(until.titleIs('Reel - Home'), WAIT_DURATION);
+    await driver.get('http://localhost:3000/');
+    await driver.wait(until.titleIs('Slot Machine'), WAIT_DURATION);
     await driver.wait(until.elementsLocated(By.css('header')), WAIT_DURATION);
 
     let [headers, footers] = await Promise.all([driver.findElements(By.css('header')), driver.findElements(By.css('footer'))]).then(results => results);

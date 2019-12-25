@@ -6,3 +6,4 @@ build
 *~
 .env*
 __snapshots__
+coverageReport
